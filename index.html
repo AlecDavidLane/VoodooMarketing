@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voodoo Immersive × Production Bureau</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+<script src="deck-stage.js" defer></script>
+<style>
+  /* Per-deck image-card helpers */
+  .img-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .img-card .img-frame {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #050814;
+    align-self: center;
+  }
+  .img-card.contain .img-frame { background: #0A0F24; }
+  .img-card .img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .img-card .tag {
+    position: absolute; top: 10px; left: 10px; z-index: 2;
+    padding: 5px 11px;
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim);
+    background: rgba(5,8,20,0.78);
+    border: 1px solid rgba(120, 140, 220, 0.25);
+    border-radius: 100px;
+    backdrop-filter: blur(6px);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .img-card .tag.tech { color: var(--cyan); border-color: rgba(61,211,255,.4); }
+  .img-card .tag.tech::before {
+    content: ''; display: inline-block; width: 5px; height: 5px;
+    background: var(--cyan); border-radius: 50%; margin-right: 7px;
+    box-shadow: 0 0 6px var(--cyan); vertical-align: middle;
+  }
+  .img-card .tag.live { color: var(--pink); border-color: rgba(224,91,255,.4); }
+  .img-card .caption {
+    position: static;
+    padding: 0 4px 2px;
+    background: none;
+    border: none;
+    border-radius: 0;
+    backdrop-filter: none;
+    font-size: 18px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  /* element chip grid (slide 2) */
+  .el-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .el-card {
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    background: var(--panel);
+    backdrop-filter: blur(14px);
+    padding: 26px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .el-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: var(--grad); opacity: 0.75;
+  }
+  .el-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em;
+    color: transparent;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text;
+    margin-bottom: 10px; display: block;
+  }
+  .el-card h4 {
+    font-size: 33px; font-weight: 700; letter-spacing: -0.01em;
+    margin: 0 0 10px;
+  }
+  .el-card p {
+    margin: 0; font-size: 21px; line-height: 1.55; color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+
+<deck-stage>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 1 · COVER
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="01 Cover">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div>
+        <div class="name" data-brand-name="">VOODOO IMMERSIVE</div>
+        <span class="sub">Design and Deployment</span>
+      </div>
+    </div>
+    <div class="meta">FOR · <span data-client-name="">PRODUCTION BUREAU</span> &nbsp;·&nbsp; <span class="pulse-dot" style="vertical-align:middle;"></span>&nbsp; CONFIDENTIAL</div>
+  </div>
+
+  <div class="hero-flair" style="top: 180px; right: 140px; width: 440px; height: 440px; opacity: 0.55;">
+    <div class="ring"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+    <div class="logo"><img src="assets/voodoo-logo.png" alt=""></div>
+  </div>
+
+  <div style="position: absolute; left: 96px; top: 420px; max-width: 1150px;">
+    <span class="eyebrow" style="margin-bottom: 44px;"><span class="chip-dot"></span> SYSTEM DESIGN · SOFTWARE DEVELOPMENT &nbsp;·&nbsp; v1.0</span>
+    <h1 class="hero" style="margin-top: 36px; font-size: 150px; line-height: 0.98;">Engineered<br><span class="accent">immersion.</span></h1>
+  </div>
+
+  <div class="chrome-bot">
+    <span><span data-brand-name="">VOODOO IMMERSIVE</span> × <span data-client-name="">PRODUCTION BUREAU</span></span>
+    <div class="progress"><span style="width: 10%;"></span></div>
+    <span>01 / 10</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 2 · PROJECT ELEMENTS EXPLAINED
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="02 Core Offerings">
+  <div class="orb orb-b"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div><div class="name" data-brand-name="">VOODOO IMMERSIVE</div><span class="sub">Core offerings</span></div>
+    </div>
+    <div class="meta">02 · WHAT WE DO</div>
+  </div>
+
+  <div style="margin-top: 110px;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; gap: 48px;">
+      <div>
+        <div class="big-num" style="margin-bottom: 12px;">02 · CORE OFFERINGS</div>
+        <h2 class="slide-title" style="font-size: 44px; line-height: 1.1;">Ambitious creative ideas, built<br>as <span class="accent">production-ready systems.</span></h2>
+      </div>
+      <p class="body" style="max-width: 500px; margin: 0; text-align: right; font-size: 22.5px; line-height: 1.55;">
+        Voodoo transforms ambitious creative ideas into reliable, production-ready systems that last for years.
+        We don't just make prototypes — we build solutions that actually work.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;">
+
+      <!-- ─── Core 01 · System Design ─── -->
+      <div class="panel grad-top" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+        <div class="img-card contain" style="height: 240px; border: none; border-radius: 0; background: #000;">
+          <span class="tag tech" style="z-index: 2;">CORE · 01</span>
+          <img src="assets/core-system-design.png" alt="System design schematic">
+        </div>
+        <div style="padding: 24px 26px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+          <h3 style="font-size: 24px; font-weight: 700; margin: 0; letter-spacing: -0.015em;">System Design</h3>
+          <p class="body" style="margin: 0; font-size: 20.3px; line-height: 1.55;">
+            We design the whole system before writing any code — deciding where hardware goes, how components communicate, how data flows, and identifying potential bottlenecks or failure points early on.
+          </p>
+          <p class="body" style="margin: 0; font-size: 20.3px; line-height: 1.55; color: var(--text);">
+            Our clients never have to worry about system architecture. We handle the tough technical decisions upfront, preventing costly problems down the road.
+          </p>
+        </div>
+      </div>
+
+      <!-- ─── Core 02 · Software Development ─── -->
+      <div class="panel grad-top" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+        <div class="img-card contain" style="height: 240px; border: none; border-radius: 0; background: #1e1e1e;">
+          <span class="tag tech" style="color: var(--purple); border-color: rgba(177,108,255,.4); z-index: 2;">CORE · 02</span>
+          <img src="assets/core-software-development.png" alt="Software development - code editor">
+        </div>
+        <div style="padding: 24px 26px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+          <h3 style="font-size: 24px; font-weight: 700; margin: 0; letter-spacing: -0.015em;">Software Development</h3>
+          <p class="body" style="margin: 0; font-size: 20.3px; line-height: 1.55;">
+            We write robust, production-quality code using modern technologies like Electron, Node.js, Python, FastAPI, and the latest AI tools. This isn't just code that works when conditions are perfect — it's real software with thorough error handling, logging, and testing, built to perform reliably for years, even in front of paying customers.
+          </p>
+        </div>
+      </div>
+
+      <!-- ─── Core 03 · Automated Deployment ─── -->
+      <div class="panel grad-top" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+        <div class="img-card" style="height: 240px; border: none; border-radius: 0;">
+          <span class="tag tech" style="color: var(--pink); border-color: rgba(224,91,255,.4); z-index: 2;">CORE · 03</span>
+          <img src="assets/core-automated-deployment.jpg" alt="Automated deployment - VR locker room" style="object-fit: cover;">
+        </div>
+        <div style="padding: 24px 26px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+          <h3 style="font-size: 24px; font-weight: 700; margin: 0; letter-spacing: -0.015em;">Automated Deployment</h3>
+          <p class="body" style="margin: 0; font-size: 20.3px; line-height: 1.55;">
+            We ensure every installation is reproducible. Any machine we deploy can be rebuilt from scratch in just hours, not days. All configurations are version-controlled, updates can be pushed remotely, and hardware swaps are quick and seamless.
+          </p>
+          <p class="body" style="margin: 0; font-size: 20.3px; line-height: 1.55; color: var(--text);">
+            When something does need updating, it can usually be done remotely — without sending an engineer to site.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>CORE OFFERINGS</span>
+    <div class="progress"><span style="width: 20%;"></span></div>
+    <span>02 / 10</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 3 · NHM SPACE — HARDWARE-LED
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="03 NHM Space">
+  <div class="orb orb-a"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div><div class="name" data-brand-name="">VOODOO IMMERSIVE</div><span class="sub">Case · Space Exhibition</span></div>
+    </div>
+    <div class="meta">03 · HARDWARE-LED · 175,000 VISITORS</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 460px 1fr; gap: 48px; margin-top: 108px;">
+    <div style="display: flex; flex-direction: column;">
+      <div class="big-num" style="margin-bottom: 14px;">CASE 01 / 05</div>
+      <h2 class="slide-title" style="font-size: 48px; line-height: 1.05;">Space<br>Exhibition</h2>
+
+      <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 10px;">
+        <span class="stage-pill" style="align-self: flex-start;">HARDWARE-LED</span>
+      </div>
+
+      <p class="body" style="margin-top: 22px; font-size: 22.5px; line-height: 1.6;">
+        The hardware, theming, and scenery were already set up — projectors, Mac Studios, amps, and speakers.
+        We came in to handle the <strong style="color: var(--text);">system design</strong> and created
+        interactive shows in QLab, building on the equipment already in place.
+      </p>
+
+      <div class="divider"></div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 21px;">
+        <div><div class="kv-label">Voodoo's scope</div><div class="kv-value" style="font-size: 22.5px;">System design | Interactive Software | QLab show control</div></div>
+        <div><div class="kv-label">Throughput</div><div class="kv-value" style="font-size: 22.5px; color: var(--cyan);">175,000 visitors · 6 months</div></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; --max-h: 300px;">
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 1.2; width: min(100%, calc(var(--max-h, 360px) * 1.2)); margin: 0 auto;"><span class="tag tech">CAD · SYSTEM DESIGN</span><img src="assets/space-design.png" alt="Space exhibition system design — projection geometry and rack layout"></div><div class="caption">Projection geometry &amp; AV layout.</div></div>
+      <div class="img-card"><div class="img-frame" style="aspect-ratio: 0.75; width: min(100%, calc(var(--max-h, 360px) * 0.75)); margin: 0 auto;"><span class="tag live">LIVE · BALL</span><img src="assets/nhm-ball-complete.jpg" alt="NHM ball installed"></div><div class="caption">Installed — NHM Hintze Hall.</div></div>
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 0.98; width: min(100%, calc(var(--max-h, 360px) * 0.98)); margin: 0 auto;"><span class="tag tech">CAD · WALL</span><img src="assets/nhm-wall-tech.jpg" alt="NHM wall technical drawing"></div><div class="caption">Curved projection wall — touch interactive.</div></div>
+      <div class="img-card"><div class="img-frame" style="aspect-ratio: 1.5; width: min(100%, calc(var(--max-h, 360px) * 1.5)); margin: 0 auto;"><span class="tag live">LIVE · WALL</span><img src="assets/nhm-wall-complete.jpg" alt="NHM wall in use"></div><div class="caption">Guests interacting with the surface.</div></div>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>CASE · SPACE EXHIBITION · HARDWARE-LED</span>
+    <div class="progress"><span style="width: 30%;"></span></div>
+    <span>03 / 10</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 4 · FRAM FLYING THEATRE — SPACE-LED
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="04 Fram">
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div><div class="name" data-brand-name="">VOODOO IMMERSIVE</div><span class="sub">Case · Flying Theatre</span></div>
+    </div>
+    <div class="meta">04 · SPACE-LED · OSLO</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 460px; gap: 48px; margin-top: 96px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; --max-h: 300px;">
+      <div class="img-card" style="grid-column: 1 / 3;"><div class="img-frame" style="aspect-ratio: 2.06; width: min(100%, calc(var(--max-h, 360px) * 2.06)); margin: 0 auto;"><span class="tag live">LIVE · AUDITORIUM</span><img src="assets/fram-complete.jpg" alt="Flying theatre — audience in show"></div><div class="caption">Delivered theatre — mid-showing.</div></div>
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 1.2; width: min(100%, calc(var(--max-h, 360px) * 1.2)); margin: 0 auto;"><span class="tag tech">CAD · SYSTEM DESIGN</span><img src="assets/fram-system-design.png" alt="System design — video and audio signal flow"></div><div class="caption">System design — video &amp; audio signal flow.</div></div>
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 1.389; width: min(100%, calc(var(--max-h, 360px) * 1.389)); margin: 0 auto;"><span class="tag tech">CAD · PROJECTION MODEL</span><img src="assets/fram-tech-2.png" alt="Projection model"></div><div class="caption">3D system model — screen + projection stack.</div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <div class="big-num" style="margin-bottom: 14px;">CASE 02 / 05</div>
+      <h2 class="slide-title" style="font-size: 48px; line-height: 1.05;">Flying<br>Theatre</h2>
+
+      <div style="margin-top: 22px;">
+        <span class="stage-pill" style="align-self: flex-start;">SPACE-LED</span>
+      </div>
+
+      <p class="body" style="margin-top: 22px; font-size: 22.5px; line-height: 1.6;">
+        Right from the start, the raked seating in the theatre defined the whole project — it was always going
+        to be a real theatre experience. We led the way with <strong style="color: var(--text);">system design,
+        show control programming, and deployment</strong>, all tailored to fit this unique setup.
+      </p>
+
+      <div class="divider"></div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 21px;">
+        <div><div class="kv-label">Voodoo's role</div><div class="kv-value" style="font-size: 22.5px;">System design | Projection Mapping | Show control | Deployment</div></div>
+        <div><div class="kv-label">Format</div><div class="kv-value" style="font-size: 22.5px; color: var(--cyan);">Panoramic theatre experience</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>CASE · FLYING THEATRE · SPACE-LED</span>
+    <div class="progress"><span style="width: 40%;"></span></div>
+    <span>04 / 10</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 5 · OCEAN OF AIR — CASE
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="05 Ocean of Air">
+  <div class="orb orb-a"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div><div class="name" data-brand-name="">VOODOO IMMERSIVE</div><span class="sub">Case · We Live in an Ocean of Air</span></div>
+    </div>
+    <div class="meta">05 · MARSHMALLOW LASER FEAST · FORBES XR INSTALL OF THE YEAR 2022</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 460px 1fr; gap: 48px; margin-top: 108px;">
+    <div style="display: flex; flex-direction: column;">
+      <div class="big-num" style="margin-bottom: 14px;">CASE 03 / 05</div>
+      <h2 class="slide-title" style="font-size: 44px; line-height: 1.05;">We Live in an<br>Ocean of Air</h2>
+
+      <div style="margin-top: 22px;">
+        <span class="stage-pill" style="align-self: flex-start;">FULL-SERVICE ENGINEERING</span>
+      </div>
+
+      <p class="body" style="margin-top: 22px; font-size: 21.8px; line-height: 1.6;">
+        Marshmallow Laser Feast's multi-sensory installation exploring the invisible links between humans and the planet — free-roam VR combined with scent and wind to deliver a ground-breaking level of immersion.
+      </p>
+      <p class="body" style="margin-top: 12px; font-size: 21.8px; line-height: 1.6;">
+        We delivered the full engineering solution: <strong style="color: var(--text);">custom software design, audience flow strategy, physical install and commissioning</strong> — one of the most successful location-based VR experiences ever staged.
+      </p>
+
+      <div class="divider"></div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 21px;">
+        <div><div class="kv-label">Client</div><div class="kv-value" style="font-size: 22.5px;">Marshmallow Laser Feast</div></div>
+        <div><div class="kv-label">Award</div><div class="kv-value" style="font-size: 22.5px; color: var(--cyan);">Forbes XR Install of the Year · 2022</div></div>
+        <div><div class="kv-label">Footfall</div><div class="kv-value" style="font-size: 22.5px; color: var(--cyan);">28,000 visitors in 12 weeks</div></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; --max-h: 300px;">
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 1.2; width: min(100%, calc(var(--max-h, 360px) * 1.2)); margin: 0 auto;"><span class="tag tech">CAD · SYSTEM DESIGN</span><img src="assets/ocean-air-schematic-v2.png" alt="Ocean of Air system design schematic"></div><div class="caption">System design — wind, power &amp; control.</div></div>
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 2.081; width: min(100%, calc(var(--max-h, 360px) * 2.081)); margin: 0 auto;"><span class="tag tech">CAD · PROJECTION DESIGN</span><img src="assets/ocean-air-projection.png" alt="Ocean of Air projection layout"></div><div class="caption">Free-roam VR play-space · projection envelope.</div></div>
+      <div class="img-card" style="grid-column: 1 / 3;"><div class="img-frame" style="aspect-ratio: 1.778; width: min(100%, calc(var(--max-h, 360px) * 1.778)); margin: 0 auto;"><span class="tag live">LIVE · IN VENUE</span><img src="assets/ocean-air-venue.jpg" alt="Ocean of Air guests in venue"></div><div class="caption">Delivered experience — guests inside the immersive environment.</div></div>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>CASE · OCEAN OF AIR · MARSHMALLOW LASER FEAST</span>
+    <div class="progress"><span style="width: 50%;"></span></div>
+    <span>05 / 10</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 6 · IAAPA EXPO ASIA — CASE
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="06 IAAPA Expo">
+  <div class="orb orb-b"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div><div class="name" data-brand-name="">VOODOO IMMERSIVE</div><span class="sub">Case · IAAPA Expo Asia, Singapore</span></div>
+    </div>
+    <div class="meta">06 · REPRODUCIBLE BY DESIGN</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 460px 1fr; gap: 48px; margin-top: 108px;">
+    <div style="display: flex; flex-direction: column;">
+      <div class="big-num" style="margin-bottom: 14px;">CASE 04 / 05</div>
+      <h2 class="slide-title" style="font-size: 44px; line-height: 1.05;">IAAPA Expo Asia<br>Singapore</h2>
+
+      <div style="margin-top: 22px;">
+        <span class="stage-pill" style="align-self: flex-start;">REPRODUCIBLE BY DESIGN</span>
+      </div>
+
+      <p class="body" style="margin-top: 22px; font-size: 21.8px; line-height: 1.6;">
+        A trade show booth designed with travel in mind. Voodoo chose the equipment, designed the system,
+        and managed deployment and commissioning — so the whole setup could be easily rebuilt for each show,
+        even without the original team present.
+      </p>
+
+      <p class="body" style="margin-top: 12px; font-size: 21.8px; line-height: 1.6; color: var(--text);">
+        Reproducible by design.
+      </p>
+
+      <div class="divider"></div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 21px;">
+        <div><div class="kv-label">Voodoo's scope</div><div class="kv-value" style="font-size: 22.5px;">System Design | Deployment | Commissioning</div></div>
+        <div><div class="kv-label">Key feature</div><div class="kv-value" style="font-size: 22.5px; color: var(--cyan);">Easily repeatable with Voodoo Deploy</div></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; --max-h: 300px;">
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 1.414; width: min(100%, calc(var(--max-h, 360px) * 1.414)); margin: 0 auto;"><span class="tag tech">CAD · SYSTEM DESIGN</span><img src="assets/iaapa-schematic.png" alt="IAAPA booth system schematic"></div><div class="caption">System schematic — servers, CCTV, network &amp; players.</div></div>
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 1.414; width: min(100%, calc(var(--max-h, 360px) * 1.414)); margin: 0 auto;"><span class="tag tech">CAD · TRUSS SPECIFICATION</span><img src="assets/iaapa-cad.png" alt="IAAPA booth truss specification"></div><div class="caption">Travel-ready truss — plan, section &amp; elevation.</div></div>
+      <div class="img-card" style="grid-column: 1 / 3;"><div class="img-frame" style="aspect-ratio: 1.595; width: min(100%, calc(var(--max-h, 360px) * 1.595)); margin: 0 auto;"><span class="tag live">LIVE · IN VENUE</span><img src="assets/iaapa-venue.jpeg" alt="IAAPA booth installed at the show"></div><div class="caption">Installed at IAAPA Expo Asia, Singapore.</div></div>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>CASE · IAAPA EXPO ASIA · SINGAPORE</span>
+    <div class="progress"><span style="width: 60%;"></span></div>
+    <span>06 / 10</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 7 · LADBIBLE — MAGIC MIRROR ACTIVATION
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="07 LADbible Mirror">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-c"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div><div class="name" data-brand-name="">VOODOO IMMERSIVE</div><span class="sub">Case · LADbible Magic Mirror</span></div>
+    </div>
+    <div class="meta">07 · MAGIC MIRROR · SPITALFIELDS MARKET</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 460px 1fr; gap: 48px; margin-top: 108px;">
+    <div style="display: flex; flex-direction: column;">
+      <div class="big-num" style="margin-bottom: 14px;">CASE 05 / 05</div>
+      <h2 class="slide-title" style="font-size: 40px; line-height: 1.05;">LADbible<br>Spitalfields<br>Activation</h2>
+
+      <div style="margin-top: 22px;">
+        <span class="stage-pill" style="align-self: flex-start;">END-TO-END BUILD</span>
+      </div>
+
+      <p class="body" style="margin-top: 22px; font-size: 21.8px; line-height: 1.6;">
+        We created a magic mirror experience right in the middle of Spitalfields, where people could virtually try on outfits and share their looks. Voodoo handled everything — from system and mechanical design to software development — delivering a complete solution, built to handle heavy public use.
+      </p>
+
+      <p class="body" style="margin-top: 12px; font-size: 21.8px; line-height: 1.6; color: var(--text);">
+        One team, one build, and a seamless installation.
+      </p>
+
+      <div class="divider"></div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 21px;">
+        <div><div class="kv-label">Scope</div><div class="kv-value" style="font-size: 22.5px;">System Design | Mechanical Design | Software Development</div></div>
+        <div><div class="kv-label">Footfall</div><div class="kv-value" style="font-size: 22.5px; color: var(--cyan);">22 people per hour</div></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; --max-h: 300px;">
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 1.388; width: min(100%, calc(var(--max-h, 360px) * 1.388)); margin: 0 auto;"><span class="tag tech">CAD · MECHANICAL DESIGN</span><img src="assets/ladbible-cad-product.png" alt="LADbible kiosk mechanical drawings — plan, section, isometric"></div><div class="caption">Plan, side &amp; isometric — full mechanical spec.</div></div>
+      <div class="img-card contain"><div class="img-frame" style="aspect-ratio: 1.416; width: min(100%, calc(var(--max-h, 360px) * 1.416)); margin: 0 auto; background: #fff;"><span class="tag tech">CAD · SYSTEM SCHEMATIC</span><img src="assets/ladbible-cad-schematic.png" alt="LADbible kiosk system schematic"></div><div class="caption">AI server · kiosk PC · display · camera · network.</div></div>
+      <div class="img-card" style="grid-column: 1 / 3;"><div class="img-frame" style="aspect-ratio: 1.416; width: min(100%, calc(var(--max-h, 360px) * 1.416)); margin: 0 auto;"><span class="tag live">LIVE · IN VENUE</span><img src="assets/ladbible-live.png" alt="LADbible magic mirror in Spitalfields Market"></div><div class="caption">Magic mirror live — Spitalfields Market.</div></div>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>CASE · LADBIBLE · SPITALFIELDS</span>
+    <div class="progress"><span style="width: 70%;"></span></div>
+    <span>07 / 10</span>
+  </div>
+</section>
+
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 8 · SYSTEM DESIGN — CAPABILITY (What's Unique)
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="08 System Design">
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="" />
+      <div><div class="name" data-brand-name>VOODOO IMMERSIVE</div><span class="sub">What's unique · System design</span></div>
+    </div>
+    <div class="meta">08 · ENGINEERED IN-HOUSE</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 720px; gap: 56px; margin-top: 108px; align-items: center;">
+    <div style="display: flex; flex-direction: column; min-height: 0;">
+      <div class="big-num" style="margin-bottom: 14px;">WHAT'S UNIQUE</div>
+      <h2 class="slide-title" style="font-size: 38px;">System<br/><span class="accent">design.</span></h2>
+
+      <p class="lead" style="margin-top: 16px; font-size: 22px;">
+        We plan out the whole installation up front — venue, hardware, software, and structure — so what gets built is exactly what was promised, and what's promised actually works.
+      </p>
+      <p class="body" style="margin-top: 8px; font-size: 19px;">
+        All the big technical decisions are made early by the same team that will handle the build and deployment. That way, we never design anything that can't actually be delivered.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 22px;">
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Venue requirements</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">Power, data, structure, environment</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Clear drawings that show exactly what the venue needs to provide.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Graphical system schematics</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">Every connection, mapped</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Easy-to-follow diagrams of how every component connects — no confusion on site.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Detailed designs in Excel</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">AV system, line by line</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Detailed AV system designs in spreadsheets, feeding the wider project.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Projection modelling</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">Throw, lens, coverage</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Planned in advance so projectors land exactly where they should.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Hardware specification</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">Trusted suppliers, right fit</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Every device chosen for reliability and the right role on the system.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Build elevations</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">One plan, every trade</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Scaled drawings so fabricators, installers and venues all work from the same plan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="img-card" style="align-self: center; justify-self: end; max-width: 100%;"><div class="img-frame" style="aspect-ratio: 0.8; width: min(100%, calc(var(--max-h, 720px) * 0.8)); margin: 0;"><span class="tag tech">CAD · SYSTEM DESIGN</span><img src="assets/system-design-hero.png" alt="System design composite — venue requirements, schematic and projection modelling" style="object-fit: contain; width: 100%; height: 100%;"></div><div class="caption">Venue requirements · system schematic · projection modelling — one consistent documentation set.</div></div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>WHAT'S UNIQUE · SYSTEM DESIGN</span>
+    <div class="progress"><span style="width: 80%;"></span></div>
+    <span>08 / 10</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 7 · CUSTOM INTERACTIVE SOFTWARE — CAPABILITY
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="07 Custom Software">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div><div class="name" data-brand-name="">VOODOO IMMERSIVE</div><span class="sub">What's unique · Custom interactive software</span></div>
+    </div>
+    <div class="meta">07 · ENGINEERED IN-HOUSE</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 720px; gap: 56px; margin-top: 108px; height: 840px; align-items: stretch;">
+    <div style="display: flex; flex-direction: column; min-height: 0;">
+      <div class="big-num" style="margin-bottom: 14px;">WHAT'S UNIQUE</div>
+      <h2 class="slide-title" style="font-size: 38px;">Custom<br>interactive <span class="accent">software.</span></h2>
+
+      <p class="lead" style="margin-top: 16px; font-size: 22px;">
+        We write robust, production-quality code using modern technologies like Electron, Node.js, Python, FastAPI, and the latest AI tools.
+      </p>
+      <p class="body" style="margin-top: 8px; font-size: 19px;">
+        This isn't just code that works when conditions are perfect — it's real software with thorough error handling, logging, and testing, built to perform reliably for years, even in front of paying customers.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 22px;">
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Real-time graphics</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">Unity &amp; Unreal</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Multi-screen sync, custom shaders, projection mapping.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Web &amp; mobile</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">Browser / iOS / Android</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Operator dashboards, guest companions, kiosk UIs.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Show control</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">Cue-accurate</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">QLab, custom servers, MIDI / OSC / DMX bridges.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">AI &amp; computer vision</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">On-device &amp; GPU</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Image gen, face / pose tracking, audio classification.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Data &amp; services</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">FastAPI · Node · Postgres</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Telemetry, analytics, content pipelines — production-grade.</p>
+        </div>
+        <div class="panel grad-top" style="padding: 16px 18px;">
+          <div class="kv-label" style="font-size: 10px;">Hardware &amp; embedded</div>
+          <div style="font-size: 24px; font-weight: 700; margin: 4px 0 4px; letter-spacing:-0.005em;">Sensors · microcontrollers</div>
+          <p class="body" style="margin: 0; font-size: 18.8px; line-height: 1.45;">Custom inputs, button rigs, ESP / Raspberry Pi bridges.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="img-card" style="height: 100%;"><div class="img-frame" style="flex: 1; width: 100%; min-height: 0; aspect-ratio: auto;"><span class="tag live">LIVE · INTERACTIVE PROJECTION</span><img src="assets/interactive-software.jpg" alt="Interactive projection experience triggered by walking into a pool of light" style="object-fit: cover; width: 100%; height: 100%;"></div><div class="caption">Interactive projection experience. Triggered by walking into a pool of light.</div></div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>CUSTOM INTERACTIVE SOFTWARE</span>
+    <div class="progress"><span style="width: 90%;"></span></div>
+    <span>09 / 10</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 7 · WHAT'S UNIQUE (Transition Layer)
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="08 What's Unique">
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="">
+      <div><div class="name" data-brand-name="">VOODOO IMMERSIVE</div><span class="sub">What's unique</span></div>
+    </div>
+    <div class="meta">08 · INFRASTRUCTURE AS CODE</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; margin-top: 108px; align-items: start;">
+    <div>
+      <div class="big-num" style="margin-bottom: 14px;">WHAT'S UNIQUE</div>
+      <h2 class="slide-title">Infrastructure<br><span class="accent">as code.</span></h2>
+      <p class="lead" style="margin-top: 26px;">
+        Every venue we ship runs on <strong style="color: var(--text);">Voodoo Deploy</strong> — every machine,
+        every show-control config, every content pack declared in source. Nothing is hand-tuned.
+        Nothing is undocumented.
+      </p>
+      <p class="body" style="margin-top: 14px; font-size: 24px;">
+        That foundation unlocks three things off-the-shelf integrators can't offer.
+      </p>
+
+      <div class="code" style="margin-top: 24px; max-width: 620px;">
+        <div class="code-head">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <span>voodoo-deploy · venue.yaml</span>
+          </div>
+          <span class="mono" style="color: var(--cyan); font-size: 11px;">DECLARATIVE</span>
+        </div>
+<pre><span class="cmt"># A whole venue, in version control:</span>
+<span class="cmd">venue:</span>      norwich-01
+<span class="cmd">machines:</span>
+  <span class="cmd">- role:</span>     show-server
+    <span class="cmd">image:</span>    show-server:v2.1.4
+  <span class="cmd">- role:</span>     content-player
+    <span class="cmd">replicas:</span> 4
+<span class="cmd">remote:</span>     av-teleport://norwich-01</pre>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="panel grad-left">
+        <div style="display: flex; align-items: baseline; gap: 16px;">
+          <div class="mono" style="color: var(--cyan); font-size: 19.5px;">01</div>
+          <div style="font-size: 33px; font-weight: 700; letter-spacing:-0.01em;">Infrastructure as code</div>
+        </div>
+        <p class="body" style="margin: 10px 0 0 34px; font-size: 22.5px;">
+          Every machine, every cue, every config lives in a Git repository. The venue is reproducible from source — review it, diff it, roll back to last week's known-good state in one command.
+        </p>
+      </div>
+
+      <div class="panel grad-left">
+        <div style="display: flex; align-items: baseline; gap: 16px;">
+          <div class="mono" style="color: #B16CFF; font-size: 19.5px;">02</div>
+          <div style="font-size: 33px; font-weight: 700; letter-spacing:-0.01em;">Automated machine deployment</div>
+        </div>
+        <p class="body" style="margin: 10px 0 0 34px; font-size: 22.5px;">
+          Bare-metal to running show in under an hour. Provision one machine or a hundred from the same source of truth — every box comes up identical, every time, with no manual install steps.
+        </p>
+      </div>
+
+      <div class="panel grad-left">
+        <div style="display: flex; align-items: baseline; gap: 16px;">
+          <div class="mono" style="color: #E05BFF; font-size: 19.5px;">03</div>
+          <div style="font-size: 33px; font-weight: 700; letter-spacing:-0.01em;">Secure remote access</div>
+        </div>
+        <p class="body" style="margin: 10px 0 0 34px; font-size: 22.5px;">
+          AV Teleport tunnels every venue to a single operations plane — encrypted, audit-logged, no exposed inbound ports. Push updates, diagnose faults and ship content overnight from anywhere.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span>INFRASTRUCTURE AS CODE</span>
+    <div class="progress"><span style="width: 90.9%;"></span></div>
+    <span>10 / 11</span>
+  </div>
+</section>
+
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 11 · THANK YOU
+     ══════════════════════════════════════════════════════════════ -->
+<section class="slide" data-screen-label="11 Thank You">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+
+  <div class="chrome-top">
+    <div class="brand">
+      <img src="assets/voodoo-logo.png" alt="" />
+      <div><div class="name" data-brand-name>VOODOO IMMERSIVE</div><span class="sub">Thank you</span></div>
+    </div>
+    <div class="meta">FOR · <span data-client-name>PRODUCTION BUREAU</span></div>
+  </div>
+
+  <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; padding-bottom: 180px;">
+    <div style="position: relative; width: 460px; height: 460px;">
+      <div class="hero-flair" style="position: absolute; inset: 0; opacity: 0.6;">
+        <div class="ring"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+      </div>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+        <img src="assets/voodoo-logo.png" alt="Voodoo Immersive" style="width: 55%; height: auto; filter: drop-shadow(0 12px 60px rgba(177, 108, 255, 0.55));" />
+      </div>
+    </div>
+
+    <h1 class="hero" style="margin: 0; font-size: 96px; text-align: center; line-height: 1;">Thank<br/><span class="accent">you.</span></h1>
+  </div>
+
+  <div class="chrome-bot">
+    <span><span data-brand-name>VOODOO IMMERSIVE</span> × <span data-client-name>PRODUCTION BUREAU</span></span>
+    <div class="progress"><span style="width: 100%;"></span></div>
+    <span>11 / 11</span>
+  </div>
+</section>
+
+
+</deck-stage>
+
+
+
+</body></html>
